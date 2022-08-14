@@ -1,0 +1,88 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call(DesaTableSeeder::class);
+        $this->call(KewarganegaraanTableSeeder::class);
+        $this->call(AgamaTableSeeder::class);
+        $this->call(PendidikanTableSeeder::class);
+        $this->call(SHDKTableSeeder::class);
+        $this->call(StatusPerkawinanTableSeeder::class);
+        $this->call(JenisPekerjaanTableSeeder::class);
+        $this->call(GolonganDarahTableSeeder::class);
+        $this->call(KlasifikasiPindahTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(StatusTableSeeder::class);
+        $this->call(KgPrasaranaSaranaKebersihanTableSeeder::class);
+        $this->call(KgPrasaranaHiburanWisataTableSeeder::class);
+        $this->call(KgPrasaranaEnergiPeneranganTableSeeder::class);
+        $this->call(KgPrasaranaSaranaPendidikanTableSeeder::class);
+        $this->call(KgPrasaranaKesehatanTableSeeder::class);
+        $this->call(KgSaranaKesehatanTableSeeder::class);
+        $this->call(KgPrasaranaOlahragaTableSeeder::class);
+        $this->call(KgPrasaranaPeribadatanTableSeeder::class);
+        $this->call(KgTeleponTableSeeder::class);
+        $this->call(KgRadioTvTableSeeder::class);
+        $this->call(KgKantorPosTableSeeder::class);
+        $this->call(KgKoranTableSeeder::class);
+        $this->call(KategoriDaratTableSeeder::class);
+        $this->call(KgPrasaranaDaratTableSeeder::class);
+        $this->call(KgSaranaDaratTableSeeder::class);
+        $this->call(KgPrasaranaLautTableSeeder::class);
+        $this->call(KgSaranaLautTableSeeder::class);
+        $this->call(KgPrasaranaUdaraTableSeeder::class);
+        $this->call(KgPendidikanFormalTableSeeder::class);
+        $this->call(KgPendidikanKeagamaanTableSeeder::class);
+        $this->call(KgPendidikanNonFormalTableSeeder::class);
+        $this->call(KgTingkatPartisipasiPolitikTableSeeder::class);
+        $this->call(KgLembagaKemasyarakatanTableSeeder::class);
+        $this->call(KgLembagaEkonomiTableSeeder::class);
+        $this->call(KgJasaLembagaKeuanganTableSeeder::class);
+        $this->call(KgIndustriKecilTableSeeder::class);
+        $this->call(KgUsahaJasaPengangkutanTableSeeder::class);
+        $this->call(KgUsahaJasaPerdaganganTableSeeder::class);
+        $this->call(KgUsahaJasaHiburanTableSeeder::class);
+        $this->call(KgUsahaJasaGasTableSeeder::class);
+        $this->call(KgUsahaJasaKeterampilanTableSeeder::class);
+        $this->call(KgUsahaJasaHukumTableSeeder::class);
+        $this->call(KgUsahaJasaPenginapanTableSeeder::class);
+        $this->call(EtnisTableSeeder::class);
+        $this->call(PendidikanSedangTableSeeder::class);
+        $this->call(PenyandangCacatTableSeeder::class);
+        $this->call(JenisKelaminTableSeeder::class);
+        $this->call(KTPElTableSeeder::class);
+        $this->call(KgPotensiWisataTableSeeder::class);
+        $this->call(KgRuangPublikTableSeeder::class);
+        $this->call(KgKebisinganTableSeeder::class);
+        $this->call(KgKualitasUdaraTableSeeder::class);
+        $this->call(KgAirPanasTableSeeder::class);
+        $this->call(KgKehutananTableSeeder::class);
+        $this->call(KgAlatProduksiLautTableSeeder::class);
+        $this->call(KgAlatProduksiTawarTableSeeder::class);
+        $this->call(KgBahanGalianTableSeeder::class);
+        $this->call(KgDampakOlahHutanTableSeeder::class);
+        $this->call(KgSumberAirBersihTableSeeder::class);
+        $this->call(KgTanamanApotikTableSeeder::class);
+        $this->call(KgTanamanPanganTableSeeder::class);
+        $this->call(KgKomoditasBuahTableSeeder::class);
+        $this->call(KgHasilPerkebunanTableSeeder::class);
+        $this->call(KgHasilHutanTableSeeder::class);
+        $this->call(KgKondisiHutanTableSeeder::class);
+        $this->call(KgPotensiAirSdaTableSeeder::class);
+        $this->call(KgJenisPopulasiTernakTableSeeder::class);
+        $this->call(KgProduksiTernakTableSeeder::class);
+        $this->call(KgPemilikUsahaTernakTableSeeder::class);
+        $this->call(KgJenisIkanTableSeeder::class);
+        $this->call(ProfilKecamatanTableSeeder::class);
+    }
+}
