@@ -25,10 +25,10 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('logout', 'UsersController@logout')->middleware('auth:api');
 
 
-//-------------------ADMIN-------------------
+    //-------------------ADMIN-------------------
 
-//-------------------OPERATOR DESA-------------------
-Route::get('datapendudukdesa', 'DataPendudukDesaController@apiindex');
+    //-------------------OPERATOR DESA-------------------
+    Route::get('datapendudukdesa', 'DataPendudukDesaController@apiindex');
 });
 //LEMBAGA EKONOMI
 Route::get('operatordesa/lembaga-ekonomi', 'LembagaEkonomiController@apiindex');
