@@ -151,6 +151,7 @@ class ProfilDesaController extends Controller
 
     public function cetak()
     {
+        $profilkecamatan = ProfilKecamatan::first();
         $potensiumum = PotensiUmum::where('desa_id', auth()->user()->desa_id)->first();
         $datatanah = DataTanah::where('desa_id', auth()->user()->desa_id)->first();
         $iklimjeniskesuburantanah = IklimJenisKesuburanTanah::where('desa_id', auth()->user()->desa_id)->first();
@@ -1082,6 +1083,7 @@ class ProfilDesaController extends Controller
         $jml_pcct_pr7 = DataPenduduk::where('desa_id', auth()->user()->desa_id)->where('jeniskelamin_id', '2')->where('penyandangcacat_id', '7')->count();
 
         return view('operatordesa.profil-desa.cetak', compact(
+            'profilkecamatan',
             'lembagaekonomi',
             'jasalembagakeuangan',
             'industrikecil',

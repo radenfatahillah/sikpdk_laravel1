@@ -84,5 +84,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KgPemilikUsahaTernakTableSeeder::class);
         $this->call(KgJenisIkanTableSeeder::class);
         $this->call(ProfilKecamatanTableSeeder::class);
+        $this->call(AlamatTableSeeder::class);
     }
 }

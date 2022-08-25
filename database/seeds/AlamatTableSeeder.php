@@ -11,6 +11,11 @@ class AlamatTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('alamat')->insert([
+            'desa_id' => '2',
+            'name' => 'SEKABAU',
+            'nama_kadus' => 'APRIADI',
+            'status' => 'Aktif',
+        ]);
     }
 }

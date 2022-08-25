@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">MONOGRAFI PROFIL DESA</h4>
-                        <a target="_blank" href="<?= route('profil-desa.cetak') ?>" type="button" class="btn btn-primary btn-md mb-2">Cetak</a>
+                        <!-- <a target="_blank" href="<?= route('profil-desa.cetak') ?>" type="button" class="btn btn-primary btn-md mb-2">Cetak</a> -->
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
