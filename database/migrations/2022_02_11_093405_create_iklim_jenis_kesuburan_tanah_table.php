@@ -14,8 +14,8 @@ class CreateIklimJenisKesuburanTanahTable extends Migration
     public function up()
     {
         Schema::create('iklim_jenis_kesuburan_tanah', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->float('curah_hujan', 5, 2)->nullable();
             $table->float('jumlah_bulan_hujan', 5, 2)->nullable();
             $table->float('kelembapan', 5, 2)->nullable();
@@ -27,6 +27,10 @@ class CreateIklimJenisKesuburanTanahTable extends Migration
             $table->float('lahan_kritis', 5, 2)->nullable();
             $table->float('lahan_terlantar', 5, 2)->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('iklim_jenis_kesuburan_tanah', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

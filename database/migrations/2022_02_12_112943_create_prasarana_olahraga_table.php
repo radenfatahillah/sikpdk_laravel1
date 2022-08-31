@@ -14,11 +14,16 @@ class CreatePrasaranaOlahragaTable extends Migration
     public function up()
     {
         Schema::create('prasarana_olahraga', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id');
-            $table->integer('kgprasaranaolahraga_id');
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgprasaranaolahraga_id');
             $table->integer('jumlah');
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_olahraga', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgprasaranaolahraga_id')->references('id')->on('kg_prasarana_olahraga')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

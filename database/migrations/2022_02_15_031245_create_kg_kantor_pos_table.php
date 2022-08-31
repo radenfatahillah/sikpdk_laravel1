@@ -14,7 +14,7 @@ class CreateKgKantorPosTable extends Migration
     public function up()
     {
         Schema::create('kg_kantor_pos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

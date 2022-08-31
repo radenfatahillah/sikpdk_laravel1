@@ -14,8 +14,8 @@ class CreateLembagaAdatTable extends Migration
     public function up()
     {
         Schema::create('lembaga_adat', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->enum('pemangkut_adat', ['Ada', 'Tidak'])->nullable();
             $table->enum('kepengurusan_adat', ['Ada', 'Tidak'])->nullable();
             $table->enum('rumah_adat', ['Ada', 'Tidak'])->nullable();
@@ -33,6 +33,10 @@ class CreateLembagaAdatTable extends Migration
             $table->enum('upacara_adat_dalam_bangun_rumah', ['Ada', 'Tidak'])->nullable();
             $table->enum('upacara_adat_penyelesaian_masalah', ['Ada', 'Tidak'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('lembaga_adat', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

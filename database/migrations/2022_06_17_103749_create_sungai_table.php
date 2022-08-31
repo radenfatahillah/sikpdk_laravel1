@@ -14,8 +14,8 @@ class CreateSungaiTable extends Migration
     public function up()
     {
         Schema::create('sungai', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('jumlah_sungai')->nullable();
             $table->enum('tercemar_sungai', ['Ya', 'Tidak'])->nullable();
             $table->enum('dangkal_sungai', ['Ya', 'Tidak'])->nullable();
@@ -24,6 +24,10 @@ class CreateSungaiTable extends Migration
             $table->enum('kurangbiota_sungai', ['Ya', 'Tidak'])->nullable();
             $table->enum('kering_sungai', ['Ya', 'Tidak'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('sungai', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

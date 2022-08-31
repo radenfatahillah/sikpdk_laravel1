@@ -14,13 +14,17 @@ class CreateUsahaJasaHiburanTable extends Migration
     public function up()
     {
         Schema::create('usaha_jasa_hiburan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgusahajasahiburan_id')->nullable();
             $table->integer('jumlah')->nullable();
             $table->integer('jenis_produk')->nullable();
             $table->integer('jumlah_tenagakerja')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('usaha_jasa_hiburan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

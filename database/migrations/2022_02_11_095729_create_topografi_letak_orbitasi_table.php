@@ -14,8 +14,8 @@ class CreateTopografiLetakOrbitasiTable extends Migration
     public function up()
     {
         Schema::create('topografi_letak_orbitasi', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->float('daratan_rendah', 5, 2)->nullable();
             $table->float('berbukit_bukit', 5, 2)->nullable();
             $table->float('daratan_tinggi', 5, 2)->nullable();
@@ -56,6 +56,10 @@ class CreateTopografiLetakOrbitasiTable extends Migration
             $table->float('waktu_provinsi_nonmotor', 5, 2)->nullable();
             $table->float('jumlah_kendaraanumum_provinsi', 5, 2)->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('topografi_letak_orbitasi', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

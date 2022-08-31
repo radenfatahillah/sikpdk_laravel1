@@ -14,11 +14,16 @@ class CreateSaranaKesehatanTable extends Migration
     public function up()
     {
         Schema::create('sarana_kesehatan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id');
-            $table->integer('kgsaranakesehatan_id');
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgsaranakesehatan_id');
             $table->integer('jumlah');
             $table->timestamps();
+        });
+
+        Schema::table('sarana_kesehatan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgsaranakesehatan_id')->references('id')->on('kg_sarana_kesehatan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

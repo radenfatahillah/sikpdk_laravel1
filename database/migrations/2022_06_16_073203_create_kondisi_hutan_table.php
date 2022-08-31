@@ -14,13 +14,17 @@ class CreateKondisiHutanTable extends Migration
     public function up()
     {
         Schema::create('kondisi_hutan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgkondisihutan_id')->nullable();
             $table->integer('baik')->nullable();
             $table->integer('rusak')->nullable();
             $table->integer('total')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('kondisi_hutan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

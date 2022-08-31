@@ -14,12 +14,16 @@ class CreatePrasaranaSaranaPendidikanTable extends Migration
     public function up()
     {
         Schema::create('prasarana_sarana_pendidikan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id');
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgprasaranasaranapendidikan_id');
             $table->integer('sewa');
             $table->integer('milik_sendiri');
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_sarana_pendidikan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

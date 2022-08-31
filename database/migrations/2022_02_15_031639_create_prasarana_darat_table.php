@@ -14,13 +14,19 @@ class CreatePrasaranaDaratTable extends Migration
     public function up()
     {
         Schema::create('prasarana_darat', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgprasaranadarat_id')->nullable();
-            $table->integer('kgdarat_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgprasaranadarat_id');
+            $table->unsignedBigInteger('kgdarat_id');
             $table->integer('baik')->nullable();
             $table->integer('rusak')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_darat', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgprasaranadarat_id')->references('id')->on('kg_prasarana_darat')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgdarat_id')->references('id')->on('kategori_darat')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

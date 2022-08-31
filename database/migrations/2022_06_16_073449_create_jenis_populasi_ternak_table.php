@@ -14,12 +14,16 @@ class CreateJenisPopulasiTernakTable extends Migration
     public function up()
     {
         Schema::create('jenis_populasi_ternak', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgjenispopulasiternak_id')->nullable();
             $table->integer('jumlahpemilik')->nullable();
             $table->integer('perkiraanjumlah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('jenis_populasi_ternak', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

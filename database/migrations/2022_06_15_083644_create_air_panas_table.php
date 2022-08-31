@@ -14,8 +14,8 @@ class CreateAirPanasTable extends Migration
     public function up()
     {
         Schema::create('air_panas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgairpanas_id')->nullable();
             $table->integer('jumlah')->nullable();
             $table->enum('manfaat', ['Wisata', 'Pengobatan Energi', 'Dll'])->nullable();
@@ -23,6 +23,10 @@ class CreateAirPanasTable extends Migration
             $table->integer('swasta')->nullable();
             $table->integer('perorangan')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('air_panas', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,12 +14,17 @@ class CreateTanamanApotikTable extends Migration
     public function up()
     {
         Schema::create('tanaman_apotik', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgtanamanapotik_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgtanamanapotik_id');
             $table->integer('luas')->nullable();
             $table->integer('hasil')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('tanaman_apotik', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgtanamanapotik_id')->references('id')->on('kg_tanaman_apotik')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

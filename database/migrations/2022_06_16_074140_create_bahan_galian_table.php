@@ -14,13 +14,17 @@ class CreateBahanGalianTable extends Migration
     public function up()
     {
         Schema::create('bahan_galian', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgbahangalian_id')->nullable();
             $table->enum('keberadaan', ['Ada', 'Tidak Ada'])->nullable();
             $table->enum('skalaproduksi', ['Besar', 'Sedang', 'Kecil'])->nullable();
             $table->enum('kepemilikan', ['Pemerintah', 'Swasta', 'Perorangan', 'Adat', 'Lain-lain'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('bahan_galian', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

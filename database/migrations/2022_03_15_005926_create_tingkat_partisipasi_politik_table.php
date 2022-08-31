@@ -14,14 +14,18 @@ class CreateTingkatPartisipasiPolitikTable extends Migration
     public function up()
     {
         Schema::create('tingkat_partisipasi_politik', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgtingkatpartisipasipolitik_id')->nullable();
             $table->integer('punyahakpilih_lakilaki')->nullable();
             $table->integer('punyahakpilih_perempuan')->nullable();
             $table->integer('manfaathakpilih_lakilaki')->nullable();
             $table->integer('manfaathakpilih_perempuan')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('tingkat_partisipasi_politik', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,14 +14,18 @@ class CreatePindahKeluarTable extends Migration
     public function up()
     {
         Schema::create('pindah_keluar', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('no_skpwni');
-            $table->integer('desa_id')->nullable();
+            $table->unsignedBigInteger('desa_id');
             $table->bigInteger('NIK');
             $table->integer('klasifikasipindah_id');
             $table->string('alamat_sekarang');
             $table->date('tanggal');
             $table->timestamps();
+        });
+
+        Schema::table('pindah_keluar', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

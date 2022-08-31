@@ -14,8 +14,8 @@ class CreatePrasaranaLKDKTable extends Migration
     public function up()
     {
         Schema::create('prasarana_lkdk', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->enum('gedung_kantor_lkd', ['Ada', 'Tidak'])->nullable();
             $table->enum('komputer_lkd', ['Ada', 'Tidak'])->nullable();
             $table->enum('mesin_fax_lkd', ['Ada', 'Tidak'])->nullable();
@@ -73,6 +73,10 @@ class CreatePrasaranaLKDKTable extends Migration
             $table->enum('kepengurusan_organisasi_profesi', ['Aktif', 'Tidak'])->nullable();
             $table->integer('buku_administrasi_org_profesi')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_lkdk', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

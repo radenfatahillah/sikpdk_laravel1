@@ -14,12 +14,17 @@ class CreateTanamanPanganTable extends Migration
     public function up()
     {
         Schema::create('tanaman_pangan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgtanamanpangan_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgtanamanpangan_id');
             $table->integer('luas')->nullable();
             $table->integer('hasil')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('tanaman_pangan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgtanamanpangan_id')->references('id')->on('kg_tanaman_pangan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

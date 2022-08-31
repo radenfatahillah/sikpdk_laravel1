@@ -14,7 +14,7 @@ class CreateKgHasilHutanTable extends Migration
     public function up()
     {
         Schema::create('kg_hasil_hutan', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

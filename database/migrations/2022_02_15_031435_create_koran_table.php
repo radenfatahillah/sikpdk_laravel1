@@ -14,11 +14,16 @@ class CreateKoranTable extends Migration
     public function up()
     {
         Schema::create('koran', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgkoran_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgkoran_id');
             $table->enum('status', ['Ada', 'Tidak Ada'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('koran', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgkoran_id')->references('id')->on('kg_koran')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

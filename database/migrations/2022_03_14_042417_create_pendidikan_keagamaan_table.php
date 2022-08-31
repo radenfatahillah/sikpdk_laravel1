@@ -14,9 +14,9 @@ class CreatePendidikanKeagamaanTable extends Migration
     public function up()
     {
         Schema::create('pendidikan_keagamaan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgpendidikankeagamaan_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgpendidikankeagamaan_id')->nullable();
             $table->string('kategoripendidikan')->nullable();
             $table->integer('jumlah')->nullable();
             $table->enum('status', ['Terakreditasi', 'Terdaftar'])->nullable();
@@ -26,6 +26,11 @@ class CreatePendidikanKeagamaanTable extends Migration
             $table->integer('jumlah_pengajar')->nullable();
             $table->integer('jumlah_siswa')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pendidikan_keagamaan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgpendidikankeagamaan_id')->references('id')->on('kg_pendidikan_keagamaan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

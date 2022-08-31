@@ -14,11 +14,15 @@ class CreatePrasaranaHiburanWisataTable extends Migration
     public function up()
     {
         Schema::create('prasarana_hiburan_wisata', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id');
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgprasaranahiburanwisata_id');
             $table->integer('jumlah');
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_hiburan_wisata', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

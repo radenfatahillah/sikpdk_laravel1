@@ -14,11 +14,16 @@ class CreatePrasaranaLautTable extends Migration
     public function up()
     {
         Schema::create('prasarana_laut', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgprasaranalaut_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgprasaranalaut_id');
             $table->integer('jumlah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_laut', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgprasaranalaut_id')->references('id')->on('kg_prasarana_laut')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

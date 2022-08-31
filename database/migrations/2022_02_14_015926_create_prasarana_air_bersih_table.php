@@ -14,8 +14,8 @@ class CreatePrasaranaAirBersihTable extends Migration
     public function up()
     {
         Schema::create('prasarana_airbersih', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('jumlah_sumur_pompa')->nullable();
             $table->integer('jumlah_sumur_gali')->nullable();
             $table->integer('jumlah_hidran_umum')->nullable();
@@ -30,6 +30,10 @@ class CreatePrasaranaAirBersihTable extends Migration
             $table->integer('pemilik_jumlah_jamban')->nullable();
             $table->enum('kondisi_saluran_drainase', ['Baik', 'Rusak ', 'Mampet', 'Kurang Memadai'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_airbersih', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

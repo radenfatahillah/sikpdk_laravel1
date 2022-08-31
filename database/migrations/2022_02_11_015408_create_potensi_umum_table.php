@@ -14,8 +14,8 @@ class CreatePotensiUmumTable extends Migration
     public function up()
     {
         Schema::create('potensi_umum', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->string('batas_utara_desa')->nullable();
             $table->string('batas_utara_kec')->nullable();
             $table->string('batas_selatan_desa')->nullable();
@@ -29,6 +29,10 @@ class CreatePotensiUmumTable extends Migration
             $table->string('perdes_no')->nullable();
             $table->string('perda_no')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('potensi_umum', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

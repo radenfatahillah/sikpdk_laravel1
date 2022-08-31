@@ -14,12 +14,17 @@ class CreateKomoditasBuahTable extends Migration
     public function up()
     {
         Schema::create('komoditas_buah', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgkomoditasbuah_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgkomoditasbuah_id');
             $table->integer('luas')->nullable();
             $table->integer('hasil')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('komoditas_buah', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgkomoditasbuah_id')->references('id')->on('kg_komoditas_buah')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

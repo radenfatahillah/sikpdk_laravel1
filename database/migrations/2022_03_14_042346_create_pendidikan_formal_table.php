@@ -14,9 +14,9 @@ class CreatePendidikanFormalTable extends Migration
     public function up()
     {
         Schema::create('pendidikan_formal', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgpendidikanformal_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgpendidikanformal_id');
             $table->integer('jumlah')->nullable();
             $table->enum('status', ['Terakreditasi', 'Terdaftar'])->nullable();
             $table->string('pemerintah')->nullable();
@@ -25,6 +25,11 @@ class CreatePendidikanFormalTable extends Migration
             $table->integer('jumlah_pengajar')->nullable();
             $table->integer('jumlah_siswa')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pendidikan_formal', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgpendidikanformal_id')->references('id')->on('kg_pendidikan_formal')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

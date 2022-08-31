@@ -14,12 +14,16 @@ class CreateAlamatTable extends Migration
     public function up()
     {
         Schema::create('alamat', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
-            $table->integer('desa_id');
+            $table->unsignedBigInteger('desa_id');
             $table->string('nama_kadus');
             $table->enum('status', ['Aktif', 'Tidak'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('alamat', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

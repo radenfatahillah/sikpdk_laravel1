@@ -14,12 +14,16 @@ class CreateAparaturDesaTable extends Migration
     public function up()
     {
         Schema::create('aparatur_desa', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->string('dasarhukumperdes')->nullable();
             $table->string('dasarhukumbpd')->nullable();
             $table->enum('keberadaanbpd', ['Ada - Aktif', 'Ada - Tidak Aktif', 'Tidak Ada'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('aparatur_desa', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateKgSumberAirBersihTable extends Migration
     public function up()
     {
         Schema::create('kg_sumber_air_bersih', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

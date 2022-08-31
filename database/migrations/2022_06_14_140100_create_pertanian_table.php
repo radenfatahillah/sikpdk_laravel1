@@ -14,8 +14,8 @@ class CreatePertanianTable extends Migration
     public function up()
     {
         Schema::create('pertanian', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('pangan_kurang5ha')->nullable();
             $table->integer('pangan_5_10ha')->nullable();
             $table->integer('pangan_10_50ha')->nullable();

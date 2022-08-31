@@ -14,8 +14,8 @@ class CreateDataTanahTable extends Migration
     public function up()
     {
         Schema::create('data_tanah', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->float('sawah_irigasi_teknis', 5, 2)->nullable();
             $table->float('sawah_irigasi_sth_teknis', 5, 2)->nullable();
             $table->float('sawah_tadah_hujan', 5, 2)->nullable();
@@ -61,6 +61,10 @@ class CreateDataTanahTable extends Migration
             $table->float('suaka_alam', 5, 2)->nullable();
             $table->float('suaka_margasatwa', 5, 2)->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('data_tanah', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

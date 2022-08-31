@@ -14,26 +14,34 @@ class CreatePindahDatangTable extends Migration
     public function up()
     {
         Schema::create('pindah_datang', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('no_skpwni');
             $table->bigInteger('NOKK_asal');
             $table->string('nama_KK_asal');
             $table->bigInteger('NIK');
             $table->string('name')->nullable();
-            $table->integer('jeniskelamin_id')->nullable();
+            $table->unsignedBigInteger('jeniskelamin_id');
             $table->string('tempatlahir')->nullable();
-            $table->integer('agama_id')->nullable();
+            $table->unsignedBigInteger('agama_id');
             $table->date('tanggallahir')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->string('nama_ibu')->nullable();
-            $table->integer('alamat_id')->nullable();
+            $table->unsignedBigInteger('alamat_id');
             $table->string('rt')->nullable();
             $table->string('rw')->nullable();
-            $table->integer('desa_id')->nullable();
+            $table->unsignedBigInteger('desa_id');
             $table->string('alamat_asal');
-            $table->integer('klasifikasipindah_id');
+            $table->unsignedBigInteger('klasifikasipindah_id');
             $table->date('tanggal');
             $table->timestamps();
+        });
+
+        Schema::table('pindah_datang', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('klasifikasipindah_id')->references('id')->on('klasifikasi_pindah')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('jeniskelamin_id')->references('id')->on('jenis_kelamin')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('alamat_id')->references('id')->on('alamat')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,12 +14,16 @@ class CreateBPDTable extends Migration
     public function up()
     {
         Schema::create('bpd', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->string('name')->nullable();
             $table->string('jabatan')->nullable();
             $table->string('pendidikan')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('bpd', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

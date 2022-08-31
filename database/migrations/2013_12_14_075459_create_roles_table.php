@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKgPendidikanNonFormalTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateKgPendidikanNonFormalTable extends Migration
      */
     public function up()
     {
-        Schema::create('kg_pendidikan_non_formal', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateKgPendidikanNonFormalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kg_pendidikan_non_formal');
+        Schema::dropIfExists('roles');
     }
 }

@@ -14,8 +14,8 @@ class CreateLembagaKeamananTable extends Migration
     public function up()
     {
         Schema::create('lembaga_keamanan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->enum('keberadaanhansip', ['Ada', 'Tidak'])->nullable();
             $table->integer('jumlah_anggota_hansip')->nullable();
             $table->integer('jumlah_anggota_satgas_linmas')->nullable();
@@ -33,6 +33,10 @@ class CreateLembagaKeamananTable extends Migration
             $table->integer('jumlah_anggota_babinkamtibmas')->nullable();
             $table->integer('jumlah_kegiatan_babinkamtibmas')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('lembaga_keamanan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

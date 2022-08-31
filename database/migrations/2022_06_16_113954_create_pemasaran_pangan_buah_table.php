@@ -14,8 +14,8 @@ class CreatePemasaranPanganBuahTable extends Migration
     public function up()
     {
         Schema::create('pemasaran_pangan_buah', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('jual_konsumen_pangan_buah')->nullable();
             $table->integer('jual_pasar_pangan_buah')->nullable();
             $table->integer('jual_kud_pangan_buah')->nullable();
@@ -24,6 +24,10 @@ class CreatePemasaranPanganBuahTable extends Migration
             $table->integer('jual_lumbung_pangan_buah')->nullable();
             $table->integer('tidak_jual_pangan_buah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pemasaran_pangan_buah', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

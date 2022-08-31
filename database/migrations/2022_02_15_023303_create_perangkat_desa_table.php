@@ -14,8 +14,8 @@ class CreatePerangkatDesaTable extends Migration
     public function up()
     {
         Schema::create('perangkat_desa', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->string('name')->nullable();
             $table->string('nip')->nullable();
             $table->enum('jabatan', [
@@ -26,6 +26,10 @@ class CreatePerangkatDesaTable extends Migration
             $table->enum('pendidikan', ['SD', 'SMP', 'SMA', 'Diploma', 'S1', 'S2', 'S3'])->nullable();
             $table->enum('status', ['Ada', 'Ada - Aktif', 'Ada - Tidak Aktif', 'Tidak Ada'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('perangkat_desa', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

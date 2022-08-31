@@ -1,5 +1,36 @@
 @extends('layouts.backend.utama')
 @section('isi')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    var jumlah_lk = <?php echo $jumlah_lk; ?>;
+    var jumlah_pr = <?php echo $jumlah_pr; ?>;
+    // Load google charts
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Jumlah'],
+            ['Laki-Laki', jumlah_lk],
+            ['Perempuan', jumlah_pr]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = {
+            'title': '',
+            'width': 500,
+            'height': 300
+        };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -37,9 +68,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"></h4>
-                    </div>
-                    <div class="card-body">
+                        <h4 class="card-title text-center">Jumlah Penduduk Laki-Laki dan Perempuan dalam Diagram Pie</h4>
+                        <div class="d-flex justify-content-center" id="piechart"></div>
                         <div class="table-responsive">
                             <table id="zero_config" class="table table-striped table-bordered">
                                 <thead>

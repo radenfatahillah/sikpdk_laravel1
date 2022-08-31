@@ -14,11 +14,15 @@ class CreatePemilikUsahaTernakTable extends Migration
     public function up()
     {
         Schema::create('pemilik_usaha_ternak', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgpemilikusahaternak_id')->nullable();
             $table->integer('jumlah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pemilik_usaha_ternak', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

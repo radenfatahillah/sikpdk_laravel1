@@ -14,8 +14,8 @@ class CreatePrasaranaBPDDusunTable extends Migration
     public function up()
     {
         Schema::create('prasarana_bpddusun', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->enum('gedung_kantor_bpd', ['Ada', 'Tidak'])->nullable();
             $table->enum('kondisi_gedung_kantor_bpd', ['Baik', 'Rusak'])->nullable();
             $table->integer('jumlah_ruang_kerja_bpd')->nullable();
@@ -40,6 +40,10 @@ class CreatePrasaranaBPDDusunTable extends Migration
             $table->integer('jenis_kegiatan_dusun')->nullable();
             $table->integer('jumlah_pengurus_dusun')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_bpddusun', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

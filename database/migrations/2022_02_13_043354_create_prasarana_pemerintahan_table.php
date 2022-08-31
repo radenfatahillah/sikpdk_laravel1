@@ -14,8 +14,8 @@ class CreatePrasaranaPemerintahanTable extends Migration
     public function up()
     {
         Schema::create('prasarana_pemerintahan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->enum('gedung_kantor_desa', ['Ada', 'Tidak'])->nullable();
             $table->enum('kondisi_gedung_kantor_desa', ['Baik', 'Rusak'])->nullable();
             $table->integer('jumlah_ruang_kerja_desa')->nullable();
@@ -55,6 +55,10 @@ class CreatePrasaranaPemerintahanTable extends Migration
             $table->enum('buku_kas_pembantu_pengeluaran_rutin', ['Ada - Terisi', 'Ada - Tidak Terisi', 'Tidak'])->nullable();
             $table->enum('buku_data_lembaga_kemasyarakatan', ['Ada - Terisi', 'Ada - Tidak Terisi', 'Tidak'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_pemerintahan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKgRadioTvTable extends Migration
+class CreateKgTeleponTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateKgRadioTvTable extends Migration
      */
     public function up()
     {
-        Schema::create('kg_radio_tv', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('kg_telepon', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateKgRadioTvTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kg_radio_tv');
+        Schema::dropIfExists('kg_telepon');
     }
 }

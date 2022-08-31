@@ -14,13 +14,18 @@ class CreateJasaLembagaKeuanganTable extends Migration
     public function up()
     {
         Schema::create('jasa_lembaga_keuangan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgjasalembagakeuangan_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgjasalembagakeuangan_id');
             $table->integer('jumlah')->nullable();
             $table->integer('kegiatan')->nullable();
             $table->integer('pengurus')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('jasa_lembaga_keuangan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgjasalembagakeuangan_id')->references('id')->on('kg_jasa_lembaga_keuangan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

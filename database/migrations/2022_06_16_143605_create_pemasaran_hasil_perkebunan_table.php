@@ -14,8 +14,8 @@ class CreatePemasaranHasilPerkebunanTable extends Migration
     public function up()
     {
         Schema::create('pemasaran_hasil_perkebunan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('jual_konsumen_kebun')->nullable();
             $table->integer('jual_pasar_kebun')->nullable();
             $table->integer('jual_kud_kebun')->nullable();
@@ -24,6 +24,10 @@ class CreatePemasaranHasilPerkebunanTable extends Migration
             $table->integer('jual_lumbung_kebun')->nullable();
             $table->integer('tidak_jual_kebun')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pemasaran_hasil_perkebunan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,11 +14,16 @@ class CreateRadioTvTable extends Migration
     public function up()
     {
         Schema::create('radio_tv', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgradiotv_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgradiotv_id');
             $table->integer('jumlah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('radio_tv', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgradiotv_id')->references('id')->on('kg_radio_tv')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

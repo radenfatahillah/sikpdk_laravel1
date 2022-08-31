@@ -14,14 +14,19 @@ class CreateHasilPerkebunanTable extends Migration
     public function up()
     {
         Schema::create('hasil_perkebunan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kghasilperkebunan_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kghasilperkebunan_id');
             $table->integer('luasnegara')->nullable();
             $table->integer('hasilnegara')->nullable();
             $table->integer('luasrakyat')->nullable();
             $table->integer('hasilrakyat')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('hasil_perkebunan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kghasilperkebunan_id')->references('id')->on('kg_hasil_perkebunan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateKgPotensiAirSdaTable extends Migration
     public function up()
     {
         Schema::create('kg_potensi_air_sda', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

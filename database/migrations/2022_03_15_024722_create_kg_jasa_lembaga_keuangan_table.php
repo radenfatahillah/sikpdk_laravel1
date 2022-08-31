@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKgTanamanPanganTable extends Migration
+class CreateKgJasaLembagaKeuanganTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateKgTanamanPanganTable extends Migration
      */
     public function up()
     {
-        Schema::create('kg_tanaman_pangan', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('kg_jasa_lembaga_keuangan', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateKgTanamanPanganTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kg_tanaman_pangan');
+        Schema::dropIfExists('kg_jasa_lembaga_keuangan');
     }
 }

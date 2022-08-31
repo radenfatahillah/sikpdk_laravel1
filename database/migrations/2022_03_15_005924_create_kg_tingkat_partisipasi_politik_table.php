@@ -14,7 +14,7 @@ class CreateKgTingkatPartisipasiPolitikTable extends Migration
     public function up()
     {
         Schema::create('kg_tingkat_partisipasi_politik', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

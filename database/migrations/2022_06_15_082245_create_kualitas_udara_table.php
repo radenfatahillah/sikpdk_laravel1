@@ -14,8 +14,8 @@ class CreateKualitasUdaraTable extends Migration
     public function up()
     {
         Schema::create('kualitas_udara', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgkualitasudara_id')->nullable();
             $table->integer('jumlah')->nullable();
             $table->string('polutan')->nullable();
@@ -24,6 +24,10 @@ class CreateKualitasUdaraTable extends Migration
             $table->integer('swasta')->nullable();
             $table->integer('perorangan')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('kualitas_udara', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

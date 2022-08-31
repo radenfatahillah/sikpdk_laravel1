@@ -14,8 +14,8 @@ class CreateLembagaPemerintahanTable extends Migration
     public function up()
     {
         Schema::create('lembaga_pemerintahan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->string('dasar_hukum_bentuk_pemdes')->nullable();
             $table->string('dasar_hukum_bentuk_bpd')->nullable();
             $table->string('koordinat_bujur')->nullable();
@@ -23,6 +23,10 @@ class CreateLembagaPemerintahanTable extends Migration
             $table->integer('tahun_bentuk')->nullable();
             $table->enum('keberadaan_bpd', ['Ada - Aktif', 'Ada - Pasif', 'Tidak Ada'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('lembaga_pemerintahan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

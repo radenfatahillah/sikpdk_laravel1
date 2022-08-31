@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKgPendidikanKeagamaanTable extends Migration
+class CreateDesaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateKgPendidikanKeagamaanTable extends Migration
      */
     public function up()
     {
-        Schema::create('kg_pendidikan_keagamaan', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('desa', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
+            $table->integer('kode_desa');
+            $table->integer('tahun_bentuk')->nullable();
+            $table->string('koordinat_bujur')->nullable();
+            $table->string('koordinat_lintang')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateKgPendidikanKeagamaanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kg_pendidikan_keagamaan');
+        Schema::dropIfExists('desa');
     }
 }

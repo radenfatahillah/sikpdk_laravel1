@@ -14,13 +14,18 @@ class CreateIndustriKecilTable extends Migration
     public function up()
     {
         Schema::create('industri_kecil', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgindustrikecil_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgindustrikecil_id');
             $table->integer('jumlah')->nullable();
             $table->integer('kegiatan')->nullable();
             $table->integer('pengurus')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('industri_kecil', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgindustrikecil_id')->references('id')->on('kg_industri_kecil')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

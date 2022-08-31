@@ -14,13 +14,17 @@ class CreateRuangPublikTable extends Migration
     public function up()
     {
         Schema::create('ruang_publik', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgruangpublik_id')->nullable();
             $table->enum('keberadaan', ['Ada', 'Tidak Ada'])->nullable();
             $table->integer('luas')->nullable();
             $table->enum('status', ['Aktif', 'Tidak Aktif'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('ruang_publik', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

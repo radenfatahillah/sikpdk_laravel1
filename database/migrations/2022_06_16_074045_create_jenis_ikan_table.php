@@ -14,11 +14,15 @@ class CreateJenisIkanTable extends Migration
     public function up()
     {
         Schema::create('jenis_ikan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgjenisikan_id')->nullable();
             $table->integer('hasil')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('jenis_ikan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

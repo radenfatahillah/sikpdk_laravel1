@@ -14,8 +14,8 @@ class CreateManfaatKondisiDanauTable extends Migration
     public function up()
     {
         Schema::create('manfaat_kondisi_danau', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('luas_danau')->nullable();
             $table->enum('perikanan_danau', ['Ya', 'Tidak'])->nullable();
             $table->enum('airminum_danau', ['Ya', 'Tidak'])->nullable();
@@ -30,6 +30,10 @@ class CreateManfaatKondisiDanauTable extends Migration
             $table->enum('keruh_danau', ['Ya', 'Tidak'])->nullable();
             $table->enum('berlumpur_danau', ['Ya', 'Tidak'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('manfaat_kondisi_danau', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -14,12 +14,16 @@ class CreatePotensiWisataTable extends Migration
     public function up()
     {
         Schema::create('potensi_wisata', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgpotensiwisata_id')->nullable();
             $table->integer('luas')->nullable();
             $table->enum('status', ['Aktif', 'Tidak Aktif'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('potensi_wisata', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

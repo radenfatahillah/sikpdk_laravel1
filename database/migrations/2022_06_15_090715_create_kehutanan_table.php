@@ -14,8 +14,8 @@ class CreateKehutananTable extends Migration
     public function up()
     {
         Schema::create('kehutanan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('kgkehutanan_id')->nullable();
             $table->integer('miliknegara')->nullable();
             $table->integer('perhutani')->nullable();
@@ -23,6 +23,10 @@ class CreateKehutananTable extends Migration
             $table->integer('milikmasyarakat')->nullable();
             $table->integer('totalluashutan')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('kehutanan', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

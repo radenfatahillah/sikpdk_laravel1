@@ -14,8 +14,8 @@ class CreatePemasaranHasilGalianTable extends Migration
     public function up()
     {
         Schema::create('pemasaran_hasil_galian', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
             $table->integer('jual_konsumen_galian')->nullable();
             $table->integer('jual_pasar_galian')->nullable();
             $table->integer('jual_kud_galian')->nullable();
@@ -25,6 +25,10 @@ class CreatePemasaranHasilGalianTable extends Migration
             $table->integer('jual_lumbung_galian')->nullable();
             $table->integer('tidak_jual_galian')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('pemasaran_hasil_galian', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

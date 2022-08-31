@@ -14,11 +14,16 @@ class CreatePrasaranaUdaraTable extends Migration
     public function up()
     {
         Schema::create('prasarana_udara', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('desa_id')->nullable();
-            $table->integer('kgprasaranaudara_id')->nullable();
+            $table->id();
+            $table->unsignedBigInteger('desa_id');
+            $table->unsignedBigInteger('kgprasaranaudara_id');
             $table->integer('jumlah')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('prasarana_udara', function (Blueprint $table) {
+            $table->foreign('desa_id')->references('id')->on('desa')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('kgprasaranaudara_id')->references('id')->on('kg_prasarana_udara')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
